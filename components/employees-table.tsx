@@ -30,7 +30,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { UserPlus, MapPin, Pencil, Trash2, FileText } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import { deleteEmployee, updateEmployee } from "@/app/actions"
+import { updateEmployee } from "@/app/actions"
 import Link from "next/link"
 
 interface Employee {
@@ -122,37 +122,6 @@ export function EmployeesTable({ employees: initialEmployees }: EmployeesTablePr
       toast({
         title: "Erreur",
         description: "Une erreur est survenue lors de la mise à jour de l'employé.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleDeleteEmployee = async (id: number) => {
-    setIsLoading(true)
-
-    try {
-      const result = await deleteEmployee(id)
-
-      if (result.success) {
-        setEmployees(employees.filter((emp) => emp.id !== id))
-
-        toast({
-          title: "Employé supprimé",
-          description: "L'employé a été supprimé avec succès.",
-        })
-      } else {
-        toast({
-          title: "Erreur",
-          description: result.error || "Une erreur est survenue lors de la suppression.",
-          variant: "destructive",
-        })
-      }
-    } catch (error) {
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue lors de la suppression de l'employé.",
         variant: "destructive",
       })
     } finally {
@@ -260,7 +229,7 @@ export function EmployeesTable({ employees: initialEmployees }: EmployeesTablePr
                     <Pencil className="h-4 w-4" />
                     <span className="sr-only">Modifier</span>
                   </Button>
-
+{/* 
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button variant="ghost" size="icon">
@@ -286,7 +255,7 @@ export function EmployeesTable({ employees: initialEmployees }: EmployeesTablePr
                         </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
-                  </AlertDialog>
+                  </AlertDialog> */}
                 </div>
               </TableCell>
             </TableRow>
