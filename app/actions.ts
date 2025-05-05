@@ -250,7 +250,8 @@ export async function updateUserProfile(
   userId: number,
   data: { name: string; email: string; currentPassword?: string; newPassword?: string }
 ) {
-  const currentUserId = await cookies()  // Attendre la résolution de la promesse
+  const cookieStore = await cookies()  // Attendre la résolution de la promesse
+  const currentUserId = cookieStore.get("userId")?.value
   const currentUser = currentUserId ? await db.getUserById(Number(currentUserId)) : null
   if (!currentUser) return { success: false, error: "Utilisateur non authentifié" }
   if (currentUser.id !== userId && !currentUser.isAdmin) {
@@ -278,7 +279,8 @@ export async function updateUserPreferences(
   userId: number,
   data: { language?: "fr" | "en"; theme?: "light" | "dark" | "system" }
 ) {
-  const currentUserId = await cookies()  // Attendre la résolution de la promesse
+  const cookieStore = await cookies()  // Attendre la résolution de la promesse
+  const currentUserId = cookieStore.get("userId")?.value
   const currentUser = currentUserId ? await db.getUserById(Number(currentUserId)) : null
 
   if (!currentUser) return { success: false, error: "Utilisateur non authentifié" }
@@ -300,7 +302,8 @@ export async function updateEmployee(
   employeeId: number,
   data: { name: string; email: string; department: string }
 ) {
-  const currentUserId = await cookies()  // Attendre la résolution de la promesse
+  const cookieStore = await cookies()  // Attendre la résolution de la promesse
+  const currentUserId = cookieStore.get("userId")?.value
   const currentUser = currentUserId ? await db.getUserById(Number(currentUserId)) : null
   if (!currentUser || !currentUser.isAdmin) {
     return { success: false, error: "Vous n'êtes pas autorisé à effectuer cette action" }
