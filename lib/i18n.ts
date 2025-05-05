@@ -275,8 +275,8 @@ export const translations = {
       en: "You are not checked in",
     },
     currentlyPresent: {
-      fr: "Pointage quotidien fermé",
-      en: "Close Tracking Daily",
+      fr: "Vous êtes actuellement présent",
+      en: "You are currently present",
     },
     history: {
       fr: "Historique des pointages",

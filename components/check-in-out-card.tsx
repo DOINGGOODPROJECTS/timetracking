@@ -197,7 +197,7 @@ export function CheckInOutCard() {
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="text-center">
             <p className="text-lg font-medium">
-              {isCheckedIn ? t("timesheet.currentlyPresent") : t("timesheet.notCheckedIn")}
+              {isCheckedIn && !isCheckedOut ? t("timesheet.currentlyPresent") : t("timesheet.notCheckedIn")}
             </p>
             {lastCheckTime && (
               <p className="text-sm text-muted-foreground">
