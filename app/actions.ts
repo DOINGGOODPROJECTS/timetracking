@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import { revalidatePath } from "next/cache"
 import { db, type LocationData } from "@/lib/db-mysql"
-import { parseISO, differenceInMinutes } from "date-fns"
+import { parseISO, differenceInMinutes, isSameDay } from "date-fns"
 import { verifyPassword } from "@/lib/password-utils"
 
 // Authentification
@@ -11,7 +11,7 @@ export async function login(email: string, password: string) {
   const user = await db.getUserByEmail(email)
 
   if (user && (await verifyPassword(password, user.password))) {
-    const cookieStore = await cookies()  // Attendre la résolution de la promesse
+    const cookieStore = await cookies()
     cookieStore.set("userId", user.id.toString(), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -19,7 +19,31 @@ export async function login(email: string, password: string) {
       path: "/",
     })
 
-    return { success: true, user: { name: user.name, email: user.email, isAdmin: user.isAdmin } }
+    const today = new Date()
+    const timeRecords = await db.getTimeRecordsByUserId(user.id)
+
+    const hasCheckInToday = timeRecords.some(
+      (record) => record.type === "check-in" && isSameDay(new Date(record.timestamp), today)
+    )
+
+    const hasCheckOutToday = timeRecords.some(
+      (record) => record.type === "check-out" && isSameDay(new Date(record.timestamp), today)
+    )
+
+    // Mise à jour des flags
+    await db.updateUser(user.id, {
+      isCheckedIn: hasCheckInToday,
+      isCheckedOut: hasCheckOutToday,
+    })
+
+    return {
+      success: true,
+      user: {
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      },
+    }
   }
 
   return { success: false, error: "Email ou mot de passe incorrect" }
