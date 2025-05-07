@@ -17,12 +17,15 @@ export default async function AdminEmployeesPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Sidebar : visible uniquement en desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 w-full p-4 sm:p-6">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Gestion des Employés</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Gestion des Employés</h1>
             </div>
 
             <Card>

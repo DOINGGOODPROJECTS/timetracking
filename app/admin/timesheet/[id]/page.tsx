@@ -38,26 +38,34 @@ export default async function AdminEmployeeTimesheetPage({ params }: { params: {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Sidebar : visible uniquement sur desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 w-full p-4 sm:p-6">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
+            {/* Titre + bouton retour adaptés au responsive */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div>
                 <Link href="/admin/employees">
-                  <Button variant="ghost" size="sm" className="mb-2">
+                  <Button variant="ghost" size="sm" className="mb-1 sm:mb-2">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Retour à la liste
                   </Button>
                 </Link>
-                <h1 className="text-3xl font-bold tracking-tight">Pointages de {employee.name}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                  Pointages de {employee.name}
+                </h1>
               </div>
             </div>
 
             <Card>
               <CardHeader>
                 <CardTitle>Historique des pointages</CardTitle>
-                <CardDescription>Consultez l'historique complet des pointages de cet employé</CardDescription>
+                <CardDescription>
+                  Consultez l'historique complet des pointages de cet employé
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <TimesheetTable timesheet={timesheet} showEmployeeName={false} />

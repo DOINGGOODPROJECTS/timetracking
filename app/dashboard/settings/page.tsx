@@ -17,16 +17,19 @@ export default async function SettingsPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Navigation latérale visible uniquement sur desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 w-full p-4 sm:p-6">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Paramètres</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Paramètres</h1>
             </div>
 
             <Tabs defaultValue="notifications" className="space-y-4">
-              <TabsList>
+              <TabsList className="flex flex-wrap gap-2">
                 <TabsTrigger value="notifications">Notifications</TabsTrigger>
                 <TabsTrigger value="application">Application</TabsTrigger>
               </TabsList>

@@ -45,12 +45,15 @@ export default function MapPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Sidebar : visible seulement en desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 w-full p-4 sm:p-6">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Carte des pointages</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Carte des pointages</h1>
             </div>
 
             <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
@@ -71,7 +74,7 @@ export default function MapPage() {
             </div>
 
             <Tabs defaultValue="all" className="space-y-4">
-              <TabsList>
+              <TabsList className="flex flex-wrap gap-2">
                 <TabsTrigger value="all">Tous les pointages</TabsTrigger>
                 <TabsTrigger value="check-in">Arrivées</TabsTrigger>
                 <TabsTrigger value="check-out">Départs</TabsTrigger>
@@ -84,23 +87,22 @@ export default function MapPage() {
                     <CardDescription>Visualisez vos pointages sur la carte</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="relative w-full h-[400px] bg-muted rounded-md overflow-hidden">
+                    <div className="relative w-full min-h-[300px] bg-muted rounded-md overflow-hidden">
                       {!mapLoaded ? (
                         <div className="absolute inset-0 flex items-center justify-center">
                           <p className="text-muted-foreground">Chargement de la carte...</p>
                         </div>
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-center">
+                          <div className="text-center px-4">
                             <p className="text-muted-foreground mb-2">Carte interactive des pointages</p>
                             <p className="text-xs text-muted-foreground">
-                              Note: Dans une application réelle, une carte interactive serait affichée ici
+                              Note : Dans une application réelle, une carte interactive serait affichée ici
                               <br />
-                              en utilisant une bibliothèque comme Leaflet, Google Maps ou Mapbox.
+                              via Leaflet, Google Maps ou Mapbox.
                             </p>
 
-                            {/* Simuler des marqueurs sur la carte */}
-                            <div className="mt-4 grid grid-cols-2 gap-4 max-w-md mx-auto">
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
                               <div className="p-3 bg-background rounded-md border shadow-sm">
                                 <div className="font-medium">Arrivée</div>
                                 <div className="text-sm text-muted-foreground">08:02:34</div>
@@ -127,7 +129,7 @@ export default function MapPage() {
                     <CardDescription>Visualisez vos pointages d'arrivée sur la carte</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="w-full h-[400px] bg-muted rounded-md flex items-center justify-center">
+                    <div className="w-full min-h-[300px] bg-muted rounded-md flex items-center justify-center">
                       <p className="text-muted-foreground">Carte des arrivées (filtrage par type de pointage)</p>
                     </div>
                   </CardContent>
@@ -141,7 +143,7 @@ export default function MapPage() {
                     <CardDescription>Visualisez vos pointages de départ sur la carte</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="w-full h-[400px] bg-muted rounded-md flex items-center justify-center">
+                    <div className="w-full min-h-[300px] bg-muted rounded-md flex items-center justify-center">
                       <p className="text-muted-foreground">Carte des départs (filtrage par type de pointage)</p>
                     </div>
                   </CardContent>

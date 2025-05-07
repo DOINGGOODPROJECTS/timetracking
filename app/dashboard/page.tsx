@@ -26,23 +26,26 @@ export default async function DashboardPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Sidebar visible uniquement sur desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 p-4 sm:p-6 w-full">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Tableau de bord</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Tableau de bord</h1>
             </div>
 
             <Tabs defaultValue="overview" className="space-y-4">
-              <TabsList>
+              <TabsList className="flex flex-wrap gap-2">
                 <TabsTrigger value="overview">Vue d'ensemble</TabsTrigger>
                 <TabsTrigger value="history">Historique</TabsTrigger>
                 <TabsTrigger value="reports">Rapports</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">Statut actuel</CardTitle>
@@ -76,7 +79,7 @@ export default async function DashboardPage() {
                   </Card>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <CheckInOutCard />
 
                   <Card className="col-span-1">

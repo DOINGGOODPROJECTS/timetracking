@@ -8,29 +8,33 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-        <div className="container flex h-16 items-center justify-between py-4">
-          <div className="flex items-center gap-2 font-bold">
+        <div className="container flex flex-wrap h-auto sm:h-16 items-center justify-between py-4 gap-y-4 sm:gap-y-0">
+          {/* Logo */}
+          <div className="flex items-center gap-2 font-bold w-full sm:w-auto justify-center sm:justify-start">
             <Image src="/logo.png" alt="Direct Impact Partners" width={32} height={32} />
             <span>Direct Impact Partners</span>
           </div>
-          <nav className="flex items-center gap-4">
+          {/* Nav */}
+          <nav className="flex items-center gap-4 w-full sm:w-auto justify-center sm:justify-end">
             <Link href="/login">
               <Button variant="outline">Connexion</Button>
             </Link>
           </nav>
         </div>
       </header>
+
       <main className="flex-1">
+        {/* Section Hero */}
         <section className="container py-12 md:py-24 lg:py-32">
           <div className="mx-auto flex max-w-[980px] flex-col items-center gap-4 text-center">
-            <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]">
+            <h1 className="text-3xl font-bold leading-tight tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl lg:leading-[1.1]">
               Gestion des Pointages des Employés
             </h1>
-            <p className="max-w-[750px] text-lg text-muted-foreground sm:text-xl">
+            <p className="max-w-[750px] text-base sm:text-lg text-muted-foreground sm:text-xl">
               Suivez facilement les heures d'arrivée et de départ de vos employés avec notre système de pointage simple
               et efficace.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/login">
                 <Button size="lg">Commencer</Button>
               </Link>
@@ -42,8 +46,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Section Features */}
         <section className="container py-12 md:py-24 lg:py-32">
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+          <div className="mx-auto grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Pointage Facile</CardTitle>
@@ -56,6 +62,7 @@ export default function Home() {
                 </p>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Gestion des Employés</CardTitle>
@@ -66,6 +73,7 @@ export default function Home() {
                 <p className="text-xs text-muted-foreground">Gérez tous vos employés depuis une interface unique.</p>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Rapports Détaillés</CardTitle>
@@ -81,9 +89,10 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+
+      <footer className="border-t py-6">
+        <div className="container flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:h-24 md:text-left">
+          <p className="text-sm leading-loose text-muted-foreground">
             &copy; {new Date().getFullYear()} Direct Impact Partners. Tous droits réservés.
           </p>
         </div>

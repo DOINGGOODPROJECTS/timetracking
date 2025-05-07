@@ -18,16 +18,19 @@ export default async function AdminPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <DashboardHeader user={user} />
-      <div className="flex flex-1">
-        <DashboardNav className="hidden w-64 border-r md:block" />
-        <main className="flex-1 p-6">
+
+      <div className="flex flex-1 flex-col md:flex-row">
+        {/* Navigation latérale affichée uniquement sur desktop */}
+        <DashboardNav className="hidden md:block md:w-64 md:border-r" />
+
+        <main className="flex-1 w-full p-4 sm:p-6">
           <div className="flex flex-col space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight">Administration</h1>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Administration</h1>
             </div>
 
             <Tabs defaultValue="employees" className="space-y-4">
-              <TabsList>
+              <TabsList className="flex flex-wrap gap-2">
                 <TabsTrigger value="employees">Employés</TabsTrigger>
                 <TabsTrigger value="reports">Rapports</TabsTrigger>
                 <TabsTrigger value="settings">Paramètres</TabsTrigger>
@@ -66,7 +69,9 @@ export default async function AdminPage() {
                     <CardDescription>Configurez les paramètres de l'application</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground">Fonctionnalité de paramètres à implémenter.</p>
+                    <p className="text-sm text-muted-foreground">
+                      Fonctionnalité de paramètres à implémenter.
+                    </p>
                   </CardContent>
                 </Card>
               </TabsContent>

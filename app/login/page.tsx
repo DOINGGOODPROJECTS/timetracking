@@ -39,29 +39,47 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
+    <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4 sm:p-6">
+      <Card className="w-full max-w-sm sm:max-w-md">
+        <CardHeader className="space-y-1 text-center sm:text-left">
           <CardTitle className="text-2xl font-bold">Connexion</CardTitle>
           <CardDescription>Entrez vos identifiants pour accéder à votre compte</CardDescription>
         </CardHeader>
+
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
-            {error && <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">{error}</div>}
+            {error && (
+              <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+                {error}
+              </div>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="exemple@entreprise.com" required />
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="exemple@entreprise.com"
+                required
+              />
             </div>
+
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                 <Label htmlFor="password">Mot de passe</Label>
-                <Button variant="link" className="h-auto p-0 text-xs" type="button">
-                  Mot de passe oublié?
+                <Button
+                  variant="link"
+                  className="h-auto p-0 text-xs"
+                  type="button"
+                >
+                  Mot de passe oublié ?
                 </Button>
               </div>
               <Input id="password" name="password" type="password" required />
             </div>
           </CardContent>
+
           <CardFooter>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Connexion en cours..." : "Se connecter"}
